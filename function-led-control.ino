@@ -27,8 +27,6 @@ void setup()
  Spark.function("led",ledToggle);
  // This is saying that when we ask the cloud for the function "led", it will employ the function ledToggle() from this app.
 
-
-
 }
 
 
@@ -59,7 +57,7 @@ int ledToggle(String command) {
       return 1;
   }
   else if (command=="green") {
-      b.allLedsOn(0,128,0);
+        b.allLedsOn(0,128,0);
       return 1;
   }
   else if (command=="red") {
