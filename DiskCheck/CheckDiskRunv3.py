@@ -37,5 +37,26 @@ if not ds.has_free_space(percent_limit):
     print "Total: %s" % ds.humanize_bytes(ds.bytes_capacity(), 1000)
     print "Used:  %s" % ds.humanize_bytes(ds.bytes_used(), 1000)
     print "Avail: %s" % ds.humanize_bytes(ds.bytes_free(), 1000)
+    def send_request():
+    # call function
+    # POST https://api.particle.io/v1/devices/330048000547343233323032/led
 
+        try:
+            response = requests.post(
+                url="https://api.particle.io/v1/devices/330048000547343233323032/led",
+                headers={
+                    "Authorization": "Bearer ad84d0f05262309428b7fa8595c360a33609537b",
+                    "Content-Type": "application/json",
+                },
+                data=json.dumps({
+                    "led": "yellow"
+                })
+            )
+            print('Response HTTP Status Code: {status_code}'.format(
+                status_code=response.status_code))
+            print('Response HTTP Response Body: {content}'.format(
+                content=response.content))
+        except requests.exceptions.RequestException:
+            print('HTTP Request failed')
+    send_request ()
     
