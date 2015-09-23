@@ -5,6 +5,7 @@
 InternetButton b = InternetButton();
 int pushCount = 0;
 int toggle = 0;
+int swVersion = .016;
 
 void setup() {
     // Tell b to get everything ready to go
@@ -13,8 +14,9 @@ void setup() {
     b.begin();
     Spark.variable("pushCount", &pushCount, INT);
     Spark.variable("toggle", &toggle, INT);
-    Spark.subscribe("keenest_test_do_button", myHandler);
-
+    Spark.variable("swVersion", &swVersion, INT);
+    Spark.subscribe("free_capacity", myHandler);
+    Spark.publish("version",".016");
 }
 
 void loop(){
@@ -35,23 +37,33 @@ void loop(){
             b.ledOff(3);
         }
     }
-
+    //wait for a second
+    delay(1000);
     /* Much like the LEDs, there are also functions to check if all the buttons are on- b.allButtonsOn()
     or if all the buttons are off- b.allButtonsOff() */
 }
 
 void myHandler(const char *event, const char *data)
 {
-    Spark.publish("do_push","received");
-  if (strcmp(data,"green")==0) {
+/*    if data > 65{
+        leds=yellow
+        ledsnumber=(data/100)*12
+    }
+    else if data > 80
+*/
+    Spark.publish("from_orabi",data);
+    Spark.publish("compare",strcmp(data,"green"))
+    if (!strcmp(data,"green")) {
 
     // if green set leds to green
-    b.allLedsOn(0,128,0);;
+    b.allLedsOn(0,128,0);
+    Spark.publish("greentrue");
   }
-  else if (strcmp(data,"off")==0) {
-    // if your buddy's beam is broken, turn your board LED on
+  else if (!strcmp(data,"off")) {
+    // if 'off' turn off the leds
     b.allLedsOff();  }
   else {
+      Spark.publish("else");
     // if the data is something else, don't do anything.
     // Really the data shouldn't be anything but those two listed above.
   }

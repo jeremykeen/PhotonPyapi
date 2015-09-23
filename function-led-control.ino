@@ -1,5 +1,7 @@
 // This #include statement was automatically added by the Particle IDE.
 #include "InternetButton/InternetButton.h"
+#include <iostream>
+#include <string>
 
 // -----------------------------------
 // Controlling LEDs over the Internet
@@ -11,6 +13,7 @@
 
 int led1 = D0;
 int led2 = D7;
+int utilPercentage;
 
 // Last time, we only needed to declare pins in the setup function.
 // This time, we are also going to register our Spark function
@@ -52,7 +55,8 @@ int ledToggle(String command) {
   and -1 if we received a totally bogus command that didn't do anything to the LEDs.
   */
 
-  if (command=="yellow") {
+utilPercentage = std::stoi(command);
+  if (command>="70") {
       b.allLedsOn(255,255,0);
       return 1;
   }
