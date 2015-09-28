@@ -16,3 +16,8 @@ for msg in messages:
         FilterName = "data"
         print 'Parsed JSON data: '
         print(parsed_json[FilterName])
+        
+# to be added:
+# if data = expand
+# send ViPR API to expand volume
+# publish event to particle cloud
