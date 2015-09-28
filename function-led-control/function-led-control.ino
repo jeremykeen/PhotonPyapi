@@ -11,7 +11,7 @@ int i;
 double howMany;
 int red, green, blue;
 int utilPercentage = 0;
-double swVersion = 0.12;
+double swVersion = 0.182;
 
 InternetButton b = InternetButton();
 
@@ -40,19 +40,29 @@ void loop()
 {
 
   if (b.buttonOn(1)) {
-        Spark.publish("expand capacity");
+        Spark.publish("ViPR: Expand ScaleIO Capacity","Expanding");
         int red = 0;
         int green = 255;
         int blue = 0;
         //make it green
         //turn any leds off
         b.allLedsOff();
+        for(int x = 1; x <=3; x++){
+          for(int i = 1; i <= 12; i++){
+            b.ledOn(i, 0, 0, 255);
+            delay(200);
+          }
+          b.allLedsOff();
+        }
+        b.allLedsOff();
         //turn to green because of expansion
         for(int i = 1; i <= 2; i++){
         b.ledOn(i, red, green, blue);
         }
         delay(500);
+        Spark.publish("ViPR: Capacity Expansion:","Success");
     }
+
 }
 
 int ledToggle(String command) {
