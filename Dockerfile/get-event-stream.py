@@ -6,7 +6,7 @@ deviceID = '<deviceid>'
 accessToken = '<accesstoken>'
 sparkURL = 'https://api.spark.io/v1/devices/' + deviceID + '/events/?access_token=' + accessToken
 
-messages = SSEClient('https://api.particle.io/v1/devices/events?access_token=<tokenid>')
+messages = SSEClient('https://api.particle.io/v1/devices/events?access_token=<deviceid>')
 
 for msg in messages:
     print 'Processing Particle Event: ', msg
