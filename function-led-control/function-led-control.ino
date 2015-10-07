@@ -74,7 +74,7 @@ int ledToggle(String command) {
     and -1 if we received a totally bogus command that didn't do anything to the LEDs.
     */
     b.allLedsOff();
-    Spark.publish("command:", command);
+    Spark.publish("command", command);
     utilPercentage = atoi (command);
     Serial.println(utilPercentage);
     //Spark.publish("utilPercentage:", utilPercentage);
